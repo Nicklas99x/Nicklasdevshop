@@ -1,0 +1,15 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <default>
+        <payment>
+            <mockpayment>
+                <active>1</active>
+                <title>Mock Payment</title>
+                <model>Nicklas\PaymentSimulation\Model\Payment</model>
+                <order_status>pending</order_status>
+                <is_gateway>0</is_gateway>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </mockpayment>
+        </payment>
+    </default>
+</config>

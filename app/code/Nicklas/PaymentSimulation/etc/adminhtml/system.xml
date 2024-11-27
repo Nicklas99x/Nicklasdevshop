@@ -1,0 +1,30 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="mockpayment" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mock Payment</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="allowspecific" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Specific Countries</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>
+                <field id="min_order_total" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum Order Total</label>
+                </field>
+                <field id="max_order_total" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Order Total</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
