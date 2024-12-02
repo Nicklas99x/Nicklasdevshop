@@ -1,0 +1,10 @@
+<h1>Failed Orders Alert</h1>
+<p>The following orders have issues:</p>
+<p>Number of failed orders: {{var failed_orders}}</p>
+<ul>
+    {{depend order_details}}
+        {{foreach order_details as order}}
+            <li>Order #{{var order.increment_id}} - Status: {{var order.status}}</li>
+        {{/foreach}}
+    {{/depend}}
+</ul>
