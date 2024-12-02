@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="alert_email_template" label="Failed Orders Alert Email Template" file="failed_orders_alert.html" type="html" module="Nicklas_SalesWatcher" area="adminhtml"/>
+</config>
