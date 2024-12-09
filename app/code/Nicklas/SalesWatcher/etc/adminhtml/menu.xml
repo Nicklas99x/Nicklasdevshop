@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/menu.xsd">
+    <menu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+        <add id="Nicklas_SalesWatcher::dashboard"
+            title="Sales Watcher"
+            module="Nicklas_SalesWatcher"
+            resource="Nicklas_SalesWatcher::dashboard"
+            action="salesoverview/dashboard/index"
+            sortOrder="10" />
+    </menu>
+</config>

@@ -1,11 +1,54 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager:etc/config.xsd">
+    <!-- Custom Cli Commands -->
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="saleswatcher:monitor" xsi:type="object">Nicklas\SalesWatcher\Console\Command\MonitorOrdersCommand</item>
                 <item name="saleswatcher:test" xsi:type="object">Nicklas\SalesWatcher\Console\Command\TestCommand</item>
             </argument>
+        </arguments>
+    </type>
+
+    
+    <!-- <virtualType name="OrderMonitorFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Nicklas\SalesWatcher\Ui\DataProvider\OrderMonitorDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="name" xsi:type="string">saleswatcher_dashboard_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="collection" xsi:type="object">Nicklas\SalesWatcher\Model\ResourceModel\Order\Collection</argument>
+            <argument name="meta" xsi:type="array"></argument>
+            <argument name="data" xsi:type="array"></argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Nicklas\SalesWatcher\Model\ResourceModel\Order\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">sales_order_collection</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="saleswatcher_dashboard_data_source" xsi:type="string">Nicklas\SalesWatcher\Model\ResourceModel\Order\Collection</item>
+            </argument>
+        </arguments>
+    </type> -->
+
+    <type name="Nicklas\SalesWatcher\Controller\Adminhtml\Dashboard\Index">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Nicklas\SalesWatcher\Ui\DataProvider\OrderMonitorDataProvider</argument>
         </arguments>
     </type>
 </config>

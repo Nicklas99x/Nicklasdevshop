@@ -22,15 +22,19 @@ class OrderMonitor
         $this->transportBuilder = $transportBuilder;
     }
 
+    public function getFailedOrders()
+    {
+        return $this->orderCollectionFactory->create()
+            ->addFieldToFilter('status', ['in' => ['canceled', 'payment_review', 'holded']])
+            ->load();
+    }
+
     /**
      * Process failed orders and send email alerts.
      */
     public function process()
     {
-        // Fetch failed orders
-        $failedOrders = $this->orderCollectionFactory->create()
-            ->addFieldToFilter('status', ['in' => ['canceled', 'payment_review', 'holded']])
-            ->load();
+        $failedOrders = $this->getFailedOrders();
 
         if ($failedOrders->getSize() > 0) {
             $this->sendAlertEmail($failedOrders);
