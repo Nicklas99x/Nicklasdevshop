@@ -1,24 +1,28 @@
-<?php 
+<?php
 
 namespace Nicklas\SalesWatcher\Controller\Adminhtml\Dashboard;
 
 use Magento\Backend\App\Action;
-use Nicklas\SalesWatcher\Ui\DataProvider\OrderMonitorDataProvider;
+use Magento\Framework\View\Result\PageFactory;
 
 class Index extends Action
 {
-    protected $dataProvider;
+    protected $resultPageFactory;
 
     public function __construct(
         Action\Context $context,
-        OrderMonitorDataProvider $dataProvider
+        PageFactory $resultPageFactory
     ) {
         parent::__construct($context);
-        $this->dataProvider = $dataProvider;
+        $this->resultPageFactory = $resultPageFactory;
     }
 
     public function execute()
     {
-        return $this->dataProvider->getDataAsJson();
+        // Render the admin layout
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->getConfig()->getTitle()->prepend(__('Sales Watcher Dashboard'));
+
+        return $resultPage;
     }
 }

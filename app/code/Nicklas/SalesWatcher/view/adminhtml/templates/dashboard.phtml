@@ -1,0 +1,23 @@
+<div id="dashboard-container">
+    <div id="dashboard-data">
+        <p>Loading data...</p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            $.ajax({
+                url: '<?= $block->getUrl("salesoverview/dashboard/data") ?>',
+                type: 'GET',
+                success: function (response) {
+                    let html = '<pre>' + JSON.stringify(response, null, 2) + '</pre>';
+                    $('#dashboard-data').html(html);
+                },
+                error: function () {
+                    $('#dashboard-data').html('<p>Error loading data.</p>');
+                }
+            });
+        });
+    });
+</script>
