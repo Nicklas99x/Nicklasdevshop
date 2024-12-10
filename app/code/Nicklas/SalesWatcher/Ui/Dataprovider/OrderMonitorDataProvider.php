@@ -3,8 +3,6 @@
 namespace Nicklas\SalesWatcher\Ui\DataProvider;
 
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 
 class OrderMonitorDataProvider
 {
@@ -22,11 +20,19 @@ class OrderMonitorDataProvider
     /**
      * Retrieve data for the UI component as JSON
      *
+     * @param array $statuses
      * @return \Magento\Framework\Controller\Result\Json
      */
-    public function getDataAsJson()
+    public function getDataAsJson(array $statuses = [])
     {
-        $this->collection->clear(); // Ensure no filters are blocking data
+        $this->collection->clear(); // Clear any existing filters
+
+        // Apply filtering by order statuses
+        if (!empty($statuses)) {
+            $this->collection->addFieldToFilter('status', ['in' => $statuses]);
+        }
+
+        // Convert collection to array
         $data = $this->collection->toArray();
 
         $response = [
@@ -34,6 +40,7 @@ class OrderMonitorDataProvider
             'items' => $data['items'],
         ];
 
+        // Create and return JSON response
         $jsonResult = $this->jsonResultFactory->create();
         return $jsonResult->setData($response);
     }

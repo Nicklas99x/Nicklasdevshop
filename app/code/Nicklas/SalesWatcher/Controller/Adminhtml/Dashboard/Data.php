@@ -19,7 +19,8 @@ class Data extends Action
 
     public function execute()
     {
-        $jsonResult = $this->dataProvider->getDataAsJson();
-        return $jsonResult;
+        $statuses = ['holded', 'payment_failed', 'canceled'];
+        // Get filtered data
+        return $this->dataProvider->getDataAsJson($statuses);
     }
 }
