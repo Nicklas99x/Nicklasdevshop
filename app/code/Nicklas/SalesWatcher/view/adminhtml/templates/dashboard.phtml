@@ -1,0 +1,42 @@
+<div id="dashboard-container">
+    <div id="dashboard-data">
+        <p>Loading data...</p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            $.ajax({
+                url: '<?= $block->getUrl("salesoverview/dashboard/data") ?>',
+                type: 'GET',
+                success: function (response) {
+                    if (response.items && response.items.length > 0) {
+                        // Format and display the data
+                        let html = '<table border="1" cellspacing="0" cellpadding="5" style="width: 100%;">';
+                        html += '<thead><tr><th>Order ID</th><th>Increment ID</th><th>Status</th><th>Created At</th></tr></thead><tbody>';
+
+                        response.items.forEach(function (item) {
+                            html += '<tr>';
+                            html += `<td>${item.entity_id}</td>`;
+                            html += `<td>${item.increment_id}</td>`;
+                            html += `<td>${item.status}</td>`;
+                            html += `<td>${item.created_at}</td>`;
+                            html += '</tr>';
+                        });
+
+                        html += '</tbody></table>';
+                        $('#dashboard-data').html(html);
+                    } else {
+                        // Handle no orders found
+                        $('#dashboard-data').html('<p>No orders found for the specified statuses.</p>');
+                    }
+                },
+                error: function () {
+                    // Handle AJAX request error
+                    $('#dashboard-data').html('<p>Error loading data.</p>');
+                }
+            });
+        });
+    });
+</script>
