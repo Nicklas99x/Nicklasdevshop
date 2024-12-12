@@ -1,11 +1,30 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/menu.xsd">
-    <menu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
-        <add id="Nicklas_SalesWatcher::dashboard"
-            title="Sales Watcher"
+    <menu>
+        <!-- Parent menu item -->
+        <add id="Nicklas_SalesWatcher::sales_watcher"
+             title="Sales Watcher"
+             module="Nicklas_SalesWatcher"
+             sortOrder="10"
+             action="adminhtml/dashboard/index"
+             resource="Nicklas_SalesWatcher::sales_watcher"/>
+
+        <!-- Submenu item -->
+        <add id="Nicklas_SalesWatcher::failed_orders"
+             title="Failed Orders"
+             module="Nicklas_SalesWatcher"
+             sortOrder="20"
+             action="salesoverview/dashboard/index"
+             parent="Nicklas_SalesWatcher::sales_watcher"
+             resource="Nicklas_SalesWatcher::failed_orders"/>
+
+        <!-- Submenu item -->
+        <add id="Nicklas_SalesWatcher::sales_overview"
+            title="Sales Overview"
             module="Nicklas_SalesWatcher"
-            resource="Nicklas_SalesWatcher::dashboard"
-            action="salesoverview/dashboard/index"
-            sortOrder="10" />
+            sortOrder="30"
+            action="salesoverview/dashboard/sales"
+            parent="Nicklas_SalesWatcher::sales_watcher"
+            resource="Nicklas_SalesWatcher::sales_overview"/>
     </menu>
 </config>

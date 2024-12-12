@@ -3,7 +3,10 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Nicklas_SalesWatcher::dashboard" title="Sales Watcher Dashboard" />
+                <resource id="Nicklas_SalesWatcher::sales_watcher" title="Sales Watcher" sortOrder="10">
+                    <resource id="Nicklas_SalesWatcher::failed_orders" title="Failed Orders" sortOrder="20"/>
+                    <resource id="Nicklas_SalesWatcher::sales_overview" title="Sales Overview" sortOrder="30"/>
+                </resource>
             </resource>
         </resources>
     </acl>
