@@ -1,0 +1,51 @@
+<div id="sales-overview-container">
+    <h2>Sales Overview</h2>
+    <label for="timespan-select">Choose Time Span:</label>
+    <select id="timespan-select">
+        <option value="last_7_days">Last 7 Days</option>
+        <option value="last_month">Last Month</option>
+        <option value="last_quarter">Last Quarter</option>
+        <option value="last_year">Last Year</option>
+        <option value="all_time" selected>All Time</option>
+    </select>
+    
+    <div id="sales-data">
+        <p>Loading data...</p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        function loadSalesData(timespan) {
+            $('#sales-data').html('<p>Loading data...</p>');
+
+            $.ajax({
+                url: '<?= $block->getUrl("salesoverview/dashboard/salesoverview") ?>',
+                type: 'GET',
+                data: { range: timespan },
+                success: function (response) {
+                    let html = '<ul>';
+                    html += '<li><strong>Total Sales:</strong> ' + response.total_sales.toFixed(2) + '</li>';
+                    html += '<li><strong>Average Order Value:</strong> ' + response.average_order_value.toFixed(2) + '</li>';
+                    html += '<li><strong>Total Orders:</strong> ' + response.total_orders + '</li>';
+                    html += '</ul>';
+                    $('#sales-data').html(html);
+                },
+                error: function () {
+                    $('#sales-data').html('<p>Error loading data.</p>');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            // Load default timespan data
+            let defaultTimespan = $('#timespan-select').val();
+            loadSalesData(defaultTimespan);
+
+            // Handle timespan change
+            $('#timespan-select').on('change', function () {
+                loadSalesData($(this).val());
+            });
+        });
+    });
+</script>
